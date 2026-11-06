@@ -1,0 +1,20 @@
+{
+  "name": "Devnet Builder Badge - Updated",
+  "symbol": "DBB",
+  "description": "Updated metadata for the demonstration Metaplex Core NFT on Solana Devnet.",
+  "image": "https://raw.githubusercontent.com/Pixie-19/turbinAssign/main/assets/nft-artwork.svg",
+  "attributes": [
+    { "trait_type": "Network", "value": "Solana Devnet" },
+    { "trait_type": "Project", "value": "Asset Lifecycle Toolkit" },
+    { "trait_type": "Status", "value": "Metadata Updated" }
+  ],
+  "properties": {
+    "files": [
+      {
+        "uri": "https://raw.githubusercontent.com/Pixie-19/turbinAssign/main/assets/nft-artwork.svg",
+        "type": "image/svg+xml"
+      }
+    ],
+    "category": "image"
+  }
+}

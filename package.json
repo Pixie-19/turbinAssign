@@ -1,0 +1,31 @@
+{
+  "name": "solana-asset-lifecycle",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "spl:create": "tsx src/spl/create-token.ts",
+    "spl:mint": "tsx src/spl/mint-tokens.ts",
+    "spl:transfer": "tsx src/spl/transfer-tokens.ts",
+    "nft:mint": "tsx src/nft/mint-core-nft.ts",
+    "nft:update": "tsx src/nft/update-metadata.ts",
+    "nft:transfer": "tsx src/nft/transfer-nft.ts",
+    "nft:burn": "tsx src/nft/burn-nft.ts",
+    "nft:verify": "tsx src/nft/verify-nft.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@metaplex-foundation/mpl-core": "^1.0.0",
+    "@metaplex-foundation/umi": "^1.0.0",
+    "@metaplex-foundation/umi-bundle-defaults": "^1.0.0",
+    "@solana/spl-token": "^0.4.14",
+    "@solana/web3.js": "^1.98.4",
+    "dotenv": "^16.4.7",
+    "bs58": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3"
+  }
+}
