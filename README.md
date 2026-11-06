@@ -34,7 +34,13 @@ solana airdrop 2
 solana address -k ./wallet.json
 ```
 
-Put the wallet path in `.env` as `KEYPAIR_PATH=./wallet.json`. `wallet.json` is ignored by Git. Do not upload it.
+Set `KEYPAIR_PATH` to the existing wallet path in the environment where the command runs. The loader accepts absolute paths, project-relative paths, and Git Bash drive paths:
+
+- WSL Ubuntu: `KEYPAIR_PATH=/home/rishita/assignment-wallet.json`
+- Windows Git Bash or PowerShell: keep that same WSL path; the loader accesses it through `\\wsl$\\Ubuntu\\home\\rishita\\assignment-wallet.json`
+- A wallet stored on Windows: use a Windows path such as `KEYPAIR_PATH=C:\\Users\\you\\wallet.json`
+
+If the WSL distribution has another name, set `WSL_DISTRO` to that exact name. For example, `WSL_DISTRO=Ubuntu-22.04`. `wallet.json` is ignored by Git. Do not upload or copy it.
 
 Create a second wallet for receiving:
 
@@ -62,12 +68,14 @@ Example `.env`:
 ```dotenv
 RPC_URL=https://api.devnet.solana.com
 KEYPAIR_PATH=./wallet.json
+WSL_DISTRO=Ubuntu
 TOKEN_DECIMALS=6
 TOKEN_MINT_ADDRESS=
 RECIPIENT_WALLET=PASTE_SECOND_WALLET_PUBLIC_KEY
 NFT_NAME=Devnet Builder Badge
 NFT_URI=https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/solana-asset-lifecycle/main/metadata/nft.json
 NFT_ASSET_ADDRESS=
+NFT_MINT_EVIDENCE_PATH=.nft-mint-evidence.json
 NFT_UPDATED_NAME=Devnet Builder Badge - Updated
 NFT_UPDATED_URI=https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/solana-asset-lifecycle/main/metadata/nft-updated.json
 ```
@@ -113,7 +121,7 @@ After the metadata URLs are reachable:
 npm run nft:mint
 ```
 
-Copy the printed asset address into `NFT_ASSET_ADDRESS` in `.env`. The script prints the asset address, owner, name, URI, transaction signature, and Explorer link.
+The script prints the asset address and transaction signature immediately after submission, waits for confirmation and account visibility, then fetches the asset. It records submission evidence in `.nft-mint-evidence.json` and refuses to mint again while that evidence exists. Copy the verified asset address into `NFT_ASSET_ADDRESS` in `.env` before rerunning any lifecycle command.
 
 This is a **Metaplex Core asset**, not a Token Metadata NFT. Core assets use a different account model and SDK.
 
@@ -142,7 +150,7 @@ This transfers the Core asset to `RECIPIENT_WALLET`. Verify the new owner on-cha
 
 ## Task 5 — Burn the NFT and verify
 
-First, make sure you are comfortable permanently destroying the test asset. If the asset has already been transferred, set `KEYPAIR_PATH` to the recipient's keypair file before running the burn script.
+First, make sure you are comfortable permanently destroying the test asset. If the asset has already been transferred, set `KEYPAIR_PATH` to the recipient's keypair file before running the burn script. The same WSL/Windows path rules above apply.
 
 ```bash
 npm run nft:burn

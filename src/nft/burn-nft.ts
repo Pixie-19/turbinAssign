@@ -16,6 +16,12 @@ const assetAddress = publicKey(
 // Fetch the NFT asset from Devnet.
 const asset = await fetchAsset(umi, assetAddress);
 
+if (asset.owner !== umi.identity.publicKey) {
+  throw new Error(
+    "Current wallet does not own this asset. Use the current owner wallet to burn it."
+  );
+}
+
 // Burn the NFT permanently.
 const result = await burn(umi, {
   asset,

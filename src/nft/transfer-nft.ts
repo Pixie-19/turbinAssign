@@ -20,6 +20,12 @@ const newOwner = publicKey(
 // Fetch the NFT asset from Devnet.
 const asset = await fetchAsset(umi, assetAddress);
 
+if (asset.owner !== umi.identity.publicKey) {
+  throw new Error(
+    "Current wallet does not own this asset. Use the current owner wallet to transfer it."
+  );
+}
+
 // Transfer NFT ownership.
 const result = await transfer(umi, {
   asset,
